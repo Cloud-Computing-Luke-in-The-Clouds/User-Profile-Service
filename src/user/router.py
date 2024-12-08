@@ -14,7 +14,7 @@ async def get_all_users(db: Session = Depends(get_db)):
 
 @router.get("/user/{user_id}", response_model=User)
 async def get_user_by_id(
-    user_id: int,
+    user_id: str,
     db: Session = Depends(get_db)
 ):
     """Get a specific user by ID"""
@@ -60,7 +60,7 @@ async def create_new_user(
 
 @router.put("/user/{user_id}", response_model=User)
 async def update_user(
-    user_id: int,
+    user_id: str,
     user: User,
     db: Session = Depends(get_db)
 ):
