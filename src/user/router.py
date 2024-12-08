@@ -7,12 +7,10 @@ from src.database import get_db
 
 router = APIRouter()
 
-
 @router.get("/users", response_model=Page[User])
 async def get_all_users(db: Session = Depends(get_db)):
     """Get all users with pagination"""
     return service.get_all_users(db)
-
 
 @router.get("/user/{user_id}", response_model=User)
 async def get_user_by_id(
