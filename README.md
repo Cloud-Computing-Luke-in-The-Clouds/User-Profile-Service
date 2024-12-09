@@ -22,3 +22,16 @@
    pip3 install -r requirements.txt
    uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
    ```
+
+
+### Deploy conatiner to vm
+```
+gcloud compute instances create-with-container user-profile-vm \
+    --container-image=us-central1-docker.pkg.dev/coms-4153-cloud-computing/user-profile/user-profile:ccd7b202ca8645e9323ef2bc815f8b9119f425b2 \
+--machine-type e2-micro --tags http-server
+```
+
+```
+gcloud compute firewall-rules create allow-http \
+ --allow tcp:80 --target-tags http-server
+ ```
