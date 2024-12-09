@@ -27,11 +27,11 @@
 ### Deploy conatiner to vm
 ```
 gcloud compute instances create-with-container user-profile-vm \
-    --container-image=us-central1-docker.pkg.dev/coms-4153-cloud-computing/user-profile/user-profile:364cba1021a84d0db2cb5dca5f6db4421f604386 \
+    --container-image=us-central1-docker.pkg.dev/coms-4153-cloud-computing/user-profile/user-profile:e431918886931204d2fe20823e7d4a37709c6ca4  \
 --machine-type e2-micro --tags http-server
 ```
 
 ```
 gcloud compute firewall-rules create allow-http \
- --allow tcp:80 --target-tags http-server
+ --allow tcp:8080 --target-tags http-server
  ```
