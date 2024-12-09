@@ -27,7 +27,7 @@
 ### Deploy conatiner to vm
 ```
 gcloud compute instances create-with-container user-profile-vm \
-    --container-image=us-central1-docker.pkg.dev/coms-4153-cloud-computing/user-profile/user-profile:ccd7b202ca8645e9323ef2bc815f8b9119f425b2 \
+    --container-image=us-central1-docker.pkg.dev/coms-4153-cloud-computing/user-profile/user-profile:364cba1021a84d0db2cb5dca5f6db4421f604386 \
 --machine-type e2-micro --tags http-server
 ```
 

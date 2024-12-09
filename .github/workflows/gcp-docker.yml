@@ -54,6 +54,7 @@ jobs:
         uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # actions/checkout@v4
       - name: 'Add USER Database Connection String to Database'
         run: |-
+          rm -rf .env
           touch .env
           echo GCP_MYSQL_CONNECTION_STRING=${{ secrets.USER_DATABASE_CONNECTION_STRING }} >> .env
           cat .env
