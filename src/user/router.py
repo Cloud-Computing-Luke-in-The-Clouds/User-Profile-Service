@@ -49,7 +49,7 @@ async def create_new_user(
 ):
     """Create a new user"""
     # Check if email already exists
-    existing_user = service.get_user_by_email(db, user.email_address)
+    existing_user = service.get_user_by_id(db, user.user_id)
     if existing_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,

@@ -12,25 +12,17 @@ def get_user_by_id(db: Session, user_id: int):
     return (db.query(UserProfile)
             .filter(UserProfile.user_id == user_id).first())
 
-def get_user_by_email(db: Session, email: str):
-    """Retrieve a user by their email address"""
-    return (db.query(UserProfile)
-            .filter(UserProfile.email_address == email).first())
-
 def get_all_users(db: Session, skip: int = 0, limit: int = 100):
     """Retrieve all users with pagination"""
     return paginate(db, select(UserProfile).order_by(UserProfile.user_id))
 
 def create_user(db: Session, user: UserProfile):
     new_user = UserProfile(
-        email_address=user.email_address,
+        user_id=user.user_id,
         name=user.name,
-        password=user.password,
         age=user.age,
         sex=user.sex,
         interest_list=user.interest_list,
-        points=0,
-        auth_token=None
     )
     db.add(new_user)
     db.commit()
