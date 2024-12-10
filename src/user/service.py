@@ -7,7 +7,7 @@ from passlib.context import CryptContext
 # Password hashing setup
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-def get_user_by_id(db: Session, user_id: int):
+def get_user_by_id(db: Session, user_id: str):
     """Retrieve a user by their ID"""
     return (db.query(UserProfile)
             .filter(UserProfile.user_id == user_id).first())
@@ -29,7 +29,7 @@ def create_user(db: Session, user: UserProfile):
     db.refresh(new_user)
     return new_user
 
-def update_user(db: Session, user_id: int, update_data: dict):
+def update_user(db: Session, user_id: str, update_data: dict):
     """Update user information"""
     user = get_user_by_id(db, user_id)
     if not user:
@@ -47,7 +47,7 @@ def update_user(db: Session, user_id: int, update_data: dict):
     db.refresh(user)
     return user
 
-def delete_user_by_id(db: Session, user_id: int):
+def delete_user_by_id(db: Session, user_id: str):
     """Delete a user by their ID"""
     user = (db.query(UserProfile)
             .filter(UserProfile.user_id == user_id).first())
@@ -56,25 +56,3 @@ def delete_user_by_id(db: Session, user_id: int):
         db.commit()
         return True
     return False
-
-def update_user_points(db: Session, user_id: int, points_change: int):
-    """Update user points"""
-    user = get_user_by_id(db, user_id)
-    if not user:
-        return None
-    
-    user.points += points_change
-    db.commit()
-    db.refresh(user)
-    return user
-
-def update_auth_token(db: Session, user_id: int, new_token: str):
-    """Update user's authentication token"""
-    user = get_user_by_id(db, user_id)
-    if not user:
-        return None
-    
-    user.auth_token = new_token
-    db.commit()
-    db.refresh(user)
-    return user

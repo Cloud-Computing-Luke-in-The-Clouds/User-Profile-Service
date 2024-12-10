@@ -41,7 +41,6 @@ async def delete_user_by_id(
         )
     return {"message": "User deleted successfully"}
 
-
 @router.post("/user", response_model=User, status_code=status.HTTP_201_CREATED)
 async def create_new_user(
     user: User,
