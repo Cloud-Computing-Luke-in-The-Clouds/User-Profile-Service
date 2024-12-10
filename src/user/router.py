@@ -29,7 +29,7 @@ async def get_user_by_id(
 
 @router.delete("/user/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_user_by_id(
-    user_id: int,
+    user_id: str,
     db: Session = Depends(get_db)
 ):
     """Delete a user by ID"""
@@ -72,18 +72,3 @@ async def update_user(
         )
     return updated_user
 
-
-@router.patch("/user/{user_id}/points")
-async def update_user_points(
-    user_id: int,
-    points_change: int,
-    db: Session = Depends(get_db)
-):
-    """Update a user's points"""
-    updated_user = service.update_user_points(db, user_id, points_change)
-    if not updated_user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"User with ID {user_id} not found"
-        )
-    return {"message": "Points updated successfully", "new_points": updated_user.points}
