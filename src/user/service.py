@@ -17,6 +17,7 @@ def get_all_users(db: Session, skip: int = 0, limit: int = 100):
     return paginate(db, select(UserProfile).order_by(UserProfile.user_id))
 
 def create_user(db: Session, user: UserProfile):
+    print(user)
     new_user = UserProfile(
         user_id=user.user_id,
         name=user.name,
@@ -34,10 +35,6 @@ def update_user(db: Session, user_id: str, update_data: dict):
     user = get_user_by_id(db, user_id)
     if not user:
         return None
-    
-    # If password is being updated, hash it
-    if 'password' in update_data:
-        update_data['password'] = pwd_context.hash(update_data['password'])
     
     for key, value in update_data.items():
         if hasattr(user, key):
